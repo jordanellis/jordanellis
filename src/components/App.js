@@ -5,6 +5,7 @@ import "nes.css/css/nes.min.css";
 import { Router, Route, Switch } from "react-router-dom";
 
 import Controls from "./Controls";
+import Footer from "./Footer";
 import HomePage from "./HomePage";
 
 const defaultHistory = createBrowserHistory();
@@ -18,6 +19,7 @@ export default function App({ history = defaultHistory }) {
           <Route exact path="/controls/" component={Controls} />
         </Switch>
       </div>
+      <Footer/>
     </Router>
   );
 }
