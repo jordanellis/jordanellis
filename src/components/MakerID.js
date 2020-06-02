@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Controls() {
+export default function MakerID() {
   return (
     <div className="nes-container with-title is-centered">
-      <p className="title">Controls</p>
+      <p className="title">SMM2 ID</p>
       <table className="menu">
         <tbody>
           <tr>
-            <td>~</td>
+            <td className="nes-text is-primary">DBB-7D0-JGF</td>
           </tr>
           <tr>
             <td>

@@ -15,7 +15,7 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -70%);
-	font-family: "Press Start 2P", cursive;
+	font-family: "Press Start 2P", Times, serif;
 }
 
 .menu {
@@ -29,8 +29,12 @@ body {
 .footer-text {
 	display: inline-block;
 	vertical-align: middle;
-	padding-bottom: 29px;
+	padding-bottom: 34px;
 	padding-right: 10px;
+}
+.nes-mario.mario-head-only {
+	height: 48px;
+	margin-left: -10px;
 }
 
 .footer {

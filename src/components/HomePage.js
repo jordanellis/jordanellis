@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Controls() {
   return (
     <div className="nes-container with-title is-centered">
-      <h1 className="title">Ellis Adventures</h1>
+      <p className="title">Ellis Adventures</p>
       <p>Begin your trial.</p>
       <table className="menu">
         <tbody>
