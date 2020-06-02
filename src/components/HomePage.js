@@ -17,8 +17,8 @@ export default function HomePage() {
           </tr>
           <tr>
             <td>
-              <Link className="nes-btn" to="/controls/">
-                Controls
+              <Link className="nes-btn" to="/built-with/">
+                Tools
               </Link>
             </td>
           </tr>

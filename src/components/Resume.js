@@ -7,6 +7,7 @@ export default function Resume() {
   const history = useHistory();
   const [hasAnswered, setHasAnswered] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [isLoading] = useState(true);
 
   const handleReadyChange = () => setIsReady(isReady => !isReady);
 
@@ -44,7 +45,12 @@ export default function Resume() {
         </div>
       </div>
       :
-        <Loading className="loading" initial={0} max={100} />
+        <Loading
+          className="loading"
+          loading={isLoading}
+          initial={0}
+          max={100}
+          component={"Done"} />
       }
     </div>
   );

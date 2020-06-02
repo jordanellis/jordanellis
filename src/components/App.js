@@ -4,7 +4,7 @@ import "../styles.css";
 import "nes.css/css/nes.min.css";
 import { Router, Route, Switch } from "react-router-dom";
 
-import Controls from "./Controls";
+import BuiltWith from "./BuiltWith";
 import Footer from "./Footer";
 import Header from "./Header";
 import HomePage from "./HomePage";
@@ -20,7 +20,7 @@ export default function App({ history = defaultHistory }) {
       <div className="App">
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/controls/" component={Controls} />
+          <Route exact path="/built-with/" component={BuiltWith} />
           <Route exact path="/maker-id/" component={MakerID} />
           <Route exact path="/resume/" component={Resume} />
         </Switch>
