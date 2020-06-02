@@ -17,7 +17,7 @@ export default function App({ history = defaultHistory }) {
   return (
     <Router history={history}>
       <Header/>
-      <div className="App">
+      <div className="app">
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/built-with/" component={BuiltWith} />

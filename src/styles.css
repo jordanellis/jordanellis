@@ -10,7 +10,7 @@ body {
   	flex-direction: column;
 }
 
-.App {
+.app {
 	position: absolute;
 	width: 80%;
     top: 10%;
@@ -22,6 +22,10 @@ body {
 	font-family: "Press Start 2P", Times, serif;
 }
 
+.are-you-ready {
+	text-align: center;
+}
+
 .built-with-container {
 	left: 50%;
 	transform: translate(-50%, 0%);
@@ -31,12 +35,6 @@ body {
 .built-with-image {
 	margin-left: 10px;
 	margin-right: 10px;
-}
-
-.center-horizontally {
-	left: 50%;
-	-ms-transform: translate(-55%, 0%);
-	transform: translate(-55%, 0%);
 }
 
 .fill-screen {
@@ -103,8 +101,12 @@ img {
 	clear: both;
 }
 
-.is-ready-menu label {
-	padding-left: 30px;
+.is-ready-menu label:nth-child(odd) {
+	margin-left: -17px;
+}
+
+.is-ready-menu label:nth-child(even) {
+	padding-left: 20px;
 }
 
 .loading {

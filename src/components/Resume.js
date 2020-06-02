@@ -24,8 +24,8 @@ export default function Resume() {
     <div>
       {!hasAnswered ?
       <div className="nes-container with-title">
-        <div>
-          <p className="title">Are you ready?</p>
+        <div className="are-you-ready">
+          <p>Are you ready?</p>
           <div className="is-ready-menu">
             <label>
               <input type="radio" className="nes-radio" name="answer" onChange={handleReadyChange} checked={isReady} />
@@ -38,7 +38,7 @@ export default function Resume() {
           </div>
           <button
               type="button"
-              className="nes-btn is-primary center-horizontally"
+              className="nes-btn is-primary"
               onClick={onContinueClick}>
             Continue
           </button>
