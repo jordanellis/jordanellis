@@ -12,11 +12,23 @@ body {
 
 .App {
 	position: absolute;
-	width: 98%;
-	top: 50%;
+	width: 80%;
+	top: 30%;
+	bottom: 40%;
 	left: 50%;
 	transform: translate(-50%, -40%);
 	font-family: "Press Start 2P", Times, serif;
+}
+
+.built-with-container {
+	left: 50%;
+	transform: translate(-50%, 0%);
+	width: 70%;
+}
+
+.built-with-image {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .center-horizontally {
@@ -76,6 +88,10 @@ body {
 
 .header-logo {
 	padding-right: 75px;
+}
+
+img {
+	image-rendering: pixelated;
 }
 
 .is-ready-menu {

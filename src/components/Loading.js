@@ -8,7 +8,6 @@ export default function Loading(props) {
 	useEffect(() => {
 	    const timer = setInterval(() => {
 	    	const newValue = loadingValue+5;
-	    	console.log(loadingValue);
 	    	if (loadingValue === max) {
 	    		setIsLoading(false);
 	    		clearInterval(timer);
@@ -20,19 +19,6 @@ export default function Loading(props) {
 	    }, 100);
 	    return () => clearInterval(timer);
 	  }, [loadingValue, max]);
-
-	const renderComponent = () => {
-		if (isLoading) {
-			return (
-				<section className="loading">
-					Loading...
-					<progress className="nes-progress is-primary" value={loadingValue} max={max}></progress>
-				</section>
-			);
-		} else {
-			return (component);
-		}
-	}
 
 	return (
 		<div>
