@@ -6,6 +6,7 @@ import { Router, Route, Switch } from "react-router-dom";
 
 import Controls from "./Controls";
 import Footer from "./Footer";
+import Header from "./Header";
 import HomePage from "./HomePage";
 import MakerID from "./MakerID";
 import Resume from "./Resume";
@@ -15,6 +16,7 @@ const defaultHistory = createBrowserHistory();
 export default function App({ history = defaultHistory }) {
   return (
     <Router history={history}>
+      <Header/>
       <div className="App">
         <Switch>
           <Route exact path="/" component={HomePage} />

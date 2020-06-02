@@ -12,9 +12,10 @@ body {
 
 .App {
 	position: absolute;
+	width: 98%;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -70%);
+	transform: translate(-50%, -40%);
 	font-family: "Press Start 2P", Times, serif;
 }
 
@@ -25,38 +26,8 @@ body {
 }
 
 .fill-screen {
-	transform: scale(2, 1);
 	height: 100%;
 	width: 100%;
-}
-
-.menu {
-	display: inline-block;
-}
-
-.menu td {
-	padding-top: 10px;
-}
-
-.footer-text {
-	display: inline-block;
-	vertical-align: middle;
-	padding-bottom: 34px;
-	padding-right: 10px;
-}
-
-.is-ready-menu {
-	display: block;
-	clear: both;
-}
-
-.is-ready-menu label {
-	padding-left: 30px;
-}
-
-.nes-mario.mario-head-only {
-	height: 48px;
-	margin-left: -10px;
 }
 
 .footer {
@@ -76,4 +47,59 @@ body {
 
 .footer i {
 	margin-top: 5px;
+}
+
+.footer-text {
+	display: inline-block;
+	vertical-align: middle;
+	padding-bottom: 34px;
+	padding-right: 10px;
+}
+
+.header {
+	position: fixed;
+ 	height: 58px;
+	line-height: 58px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	background-color: #e9eef8;
+}
+
+.header-button {
+	padding-left: 25px;
+}
+
+.header-button:hover {
+	cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer;
+}
+
+.header-logo {
+	padding-right: 75px;
+}
+
+.is-ready-menu {
+	display: block;
+	clear: both;
+}
+
+.is-ready-menu label {
+	padding-left: 30px;
+}
+
+.loading {
+	padding: 10px;
+}
+
+.menu {
+	display: inline-block;
+}
+
+.menu td {
+	padding-top: 10px;
+}
+
+.nes-mario.mario-head-only {
+	height: 48px;
+	margin-left: -10px;
 }

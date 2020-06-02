@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
+import Loading from "./Loading";
 
 export default function Resume() {
   const history = useHistory();
@@ -19,34 +21,31 @@ export default function Resume() {
 
   return (
     <div>
-      <Link className="nes-btn" to="/">
-        Home
-      </Link>
-      <div className={hasAnswered ? "nes-container" : "nes-container with-title"}>
-        {!hasAnswered ?
-          <div>
-            <p className="title">Are you ready?</p>
-            <div className="is-ready-menu">
-              <label>
-                <input type="radio" className="nes-radio" name="answer" onChange={handleReadyChange} checked={isReady} />
-                <span>Yes</span>
-              </label>
-              <label>
-                <input type="radio" className="nes-radio" name="answer" onChange={handleReadyChange} checked={!isReady} />
-                <span>No</span>
-              </label>
-            </div>
-            <button
-                type="button"
-                className="nes-btn is-primary center-horizontally"
-                onClick={onContinueClick}>
-              Continue
-            </button>
+      {!hasAnswered ?
+      <div className="nes-container with-title">
+        <div>
+          <p className="title">Are you ready?</p>
+          <div className="is-ready-menu">
+            <label>
+              <input type="radio" className="nes-radio" name="answer" onChange={handleReadyChange} checked={isReady} />
+              <span>Yes</span>
+            </label>
+            <label>
+              <input type="radio" className="nes-radio" name="answer" onChange={handleReadyChange} checked={!isReady} />
+              <span>No</span>
+            </label>
           </div>
-        :
-          <div>begin</div>
-        }
+          <button
+              type="button"
+              className="nes-btn is-primary center-horizontally"
+              onClick={onContinueClick}>
+            Continue
+          </button>
+        </div>
       </div>
+      :
+        <Loading className="loading" initial={0} max={100} />
+      }
     </div>
   );
 }
