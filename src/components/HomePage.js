@@ -1,18 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Controls() {
+export default function HomePage() {
   return (
     <div className="nes-container with-title is-centered">
       <p className="title">Ellis Adventures</p>
-      <p>Begin your trial.</p>
+      <p>View his journey.</p>
       <table className="menu">
         <tbody>
           <tr>
             <td>
-              <button type="button" className="nes-btn is-primary">
+              <Link className="nes-btn is-primary" to="/resume/">
                 Begin
-              </button>
+              </Link>
             </td>
           </tr>
           <tr>

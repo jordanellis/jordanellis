@@ -8,6 +8,7 @@ import Controls from "./Controls";
 import Footer from "./Footer";
 import HomePage from "./HomePage";
 import MakerID from "./MakerID";
+import Resume from "./Resume";
 
 const defaultHistory = createBrowserHistory();
 
@@ -19,6 +20,7 @@ export default function App({ history = defaultHistory }) {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/controls/" component={Controls} />
           <Route exact path="/maker-id/" component={MakerID} />
+          <Route exact path="/resume/" component={Resume} />
         </Switch>
       </div>
       <Footer/>

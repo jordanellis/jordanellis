@@ -18,6 +18,18 @@ body {
 	font-family: "Press Start 2P", Times, serif;
 }
 
+.center-horizontally {
+	left: 50%;
+	-ms-transform: translate(-55%, 0%);
+	transform: translate(-55%, 0%);
+}
+
+.fill-screen {
+	transform: scale(2, 1);
+	height: 100%;
+	width: 100%;
+}
+
 .menu {
 	display: inline-block;
 }
@@ -32,6 +44,16 @@ body {
 	padding-bottom: 34px;
 	padding-right: 10px;
 }
+
+.is-ready-menu {
+	display: block;
+	clear: both;
+}
+
+.is-ready-menu label {
+	padding-left: 30px;
+}
+
 .nes-mario.mario-head-only {
 	height: 48px;
 	margin-left: -10px;
