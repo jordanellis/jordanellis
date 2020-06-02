@@ -13,9 +13,11 @@ body {
 .App {
 	position: absolute;
 	width: 80%;
-	top: 30%;
-	bottom: 40%;
-	left: 50%;
+    top: 10%;
+    bottom: 0%;
+    left: 50%;
+    margin-top: 70px;
+    margin-bottom: 430px;
 	transform: translate(-50%, -40%);
 	font-family: "Press Start 2P", Times, serif;
 }
@@ -51,6 +53,7 @@ body {
 	width: 100%;
 	text-align: center;
 	background-color: #e9eef8;
+	z-index: 3;
 }
 
 .footer a {
@@ -76,6 +79,7 @@ body {
 	top: 0;
 	width: 100%;
 	background-color: #e9eef8;
+	z-index: 3;
 }
 
 .header-button {
