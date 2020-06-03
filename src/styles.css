@@ -125,3 +125,8 @@ img {
 	height: 48px;
 	margin-left: -10px;
 }
+
+.sankey-chart {
+	display: inline-block;
+}
+
