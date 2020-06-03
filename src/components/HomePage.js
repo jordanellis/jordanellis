@@ -17,6 +17,13 @@ export default function HomePage() {
           </tr>
           <tr>
             <td>
+              <Link className="nes-btn is-primary" to="/skills/">
+                Skills
+              </Link>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <Link className="nes-btn" to="/built-with/">
                 Tools
               </Link>

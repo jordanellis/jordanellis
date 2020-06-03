@@ -10,6 +10,7 @@ import Header from "./Header";
 import HomePage from "./HomePage";
 import MakerID from "./MakerID";
 import Resume from "./Resume";
+import Skills from "./Skills";
 
 const defaultHistory = createBrowserHistory();
 
@@ -23,6 +24,7 @@ export default function App({ history = defaultHistory }) {
           <Route exact path="/built-with/" component={BuiltWith} />
           <Route exact path="/maker-id/" component={MakerID} />
           <Route exact path="/resume/" component={Resume} />
+          <Route exact path="/skills/" component={Skills} />
         </Switch>
       </div>
       <Footer/>
