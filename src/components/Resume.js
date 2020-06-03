@@ -50,7 +50,7 @@ export default function Resume() {
           loading={isLoading}
           initial={0}
           max={100}
-          component={"Done"} />
+          component={"Done - TODO"} />
       }
     </div>
   );
