@@ -127,6 +127,6 @@ img {
 }
 
 .sankey-chart {
+	width: 100%;
 	display: inline-block;
 }
-
