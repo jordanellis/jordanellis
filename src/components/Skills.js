@@ -4,8 +4,8 @@ import { Chart } from "react-google-charts";
 import data from "./sankey/sankey-data"
 
 export default function Skills() {
-  const colors = ['#96bed3', '#a2cf7a', '#eb8a89', '#edaf5f',
-                  '#baa2c6', '#efef89', '#0f68a4', '#23901c'];
+  const colors = ['#86aec3', '#92bf6a', '#db7a79', '#dd9f4f',
+                  '#aa92b6', '#dfdf79', '#005894', '#13800c'];
   const options = {
     tooltip: {
       isHtml: true,
@@ -13,7 +13,7 @@ export default function Skills() {
         fontName: 'Press Start 2P',
         fontSize: 10
       }
-    },  
+    },
     sankey: {
       node: {
         label: {
@@ -21,7 +21,7 @@ export default function Skills() {
           fontSize: 8
         },
         colors: colors,
-        width: 5
+        width: 10
       },
       link: {
         colorMode: 'gradient',
@@ -36,11 +36,12 @@ export default function Skills() {
       <div className="sankey-chart">
         <Chart
           width="100%"
-          height={'400px'}
+          height={'29.625rem'}
           chartType="Sankey"
           loader={<div>Loading Chart...</div>}
           options={options}
           data={data}
+          onMouseOver={(data) => console.log(data)}
           rootProps={{ 'data-testid': '1' }}
         />
       </div>

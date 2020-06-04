@@ -11,14 +11,12 @@ body {
 }
 
 .app {
-	position: absolute;
 	width: 80%;
-    top: 10%;
     bottom: 0%;
-    left: 50%;
-    margin-top: 70px;
-    margin-bottom: 430px;
-	transform: translate(-50%, -40%);
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 4.0625rem;
+    margin-bottom: 4.0625rem;
 	font-family: "Press Start 2P", Times, serif;
 }
 
@@ -33,8 +31,20 @@ body {
 }
 
 .built-with-image {
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 0.625rem;
+	margin-right: 0.625rem;
+}
+
+div.google-visualization-tooltip {
+	width: 12rem;
+	background-color: #e9eef8;
+	background: rgb(233, 233, 256);
+    background: rgba(233, 233, 256, 0.65);
+	border-color: #000000;
+	border-width: 0.25rem;
+	border-radius: 0.625rem;
+	padding: 0.625rem;
+	padding-bottom: 1rem;
 }
 
 .fill-screen {
@@ -44,8 +54,8 @@ body {
 
 .footer {
 	position: fixed;
- 	height: 58px;
-	line-height: 58px;
+ 	height: 3.625rem;
+	line-height: 3.625rem;
 	left: 0;
 	bottom: 0;
 	width: 100%;
@@ -55,24 +65,24 @@ body {
 }
 
 .footer a {
-	padding: 5px;
+	padding: 0.3125rem;
 }
 
 .footer i {
-	margin-top: 5px;
+	margin-top: 0.3125rem;
 }
 
 .footer-text {
 	display: inline-block;
 	vertical-align: middle;
-	padding-bottom: 34px;
-	padding-right: 10px;
+	padding-bottom: 2.125rem;
+	padding-right: 0.625rem;
 }
 
 .header {
 	position: fixed;
- 	height: 58px;
-	line-height: 58px;
+ 	height: 3.625rem;
+	line-height: 3.625rem;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -81,7 +91,7 @@ body {
 }
 
 .header-button {
-	padding-left: 25px;
+	padding-left: 1.5625rem;
 }
 
 .header-button:hover {
@@ -89,7 +99,7 @@ body {
 }
 
 .header-logo {
-	padding-right: 75px;
+	padding-right: 4.6875rem;
 }
 
 img {
@@ -102,15 +112,15 @@ img {
 }
 
 .is-ready-menu label:nth-child(odd) {
-	margin-left: -17px;
+	margin-left: -1.0625rem;
 }
 
 .is-ready-menu label:nth-child(even) {
-	padding-left: 20px;
+	padding-left: 1.25rem;
 }
 
 .loading {
-	padding: 10px;
+	padding: 0.625rem;
 }
 
 .menu {
@@ -118,12 +128,20 @@ img {
 }
 
 .menu td {
-	padding-top: 10px;
+	padding-top: 0.625rem;
 }
 
 .nes-mario.mario-head-only {
-	height: 48px;
-	margin-left: -10px;
+	height: 3rem;
+	margin-left: -0.625rem;
+}
+
+path {
+	fill-opacity: 0.5;
+}
+
+path:hover {
+	fill-opacity: 1;
 }
 
 .sankey-chart {
