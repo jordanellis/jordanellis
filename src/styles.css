@@ -24,15 +24,25 @@ body {
 	text-align: center;
 }
 
-.built-with-container {
-	left: 50%;
-	transform: translate(-50%, 0%);
-	width: 70%;
-}
 
 .built-with-image {
-	margin-left: 0.625rem;
-	margin-right: 0.625rem;
+	margin-right: 2.325rem;
+}
+
+.built-with-row {
+	display: inline-block;
+	width: 100%;
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+}
+
+.built-with-row td {
+	font-size: 1.5rem;
+	display: inline-block;
+}
+
+.built-with-tbody {
+	text-align: center;
 }
 
 div.google-visualization-tooltip {

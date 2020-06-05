@@ -41,7 +41,6 @@ export default function Skills() {
           loader={<div>Loading Chart...</div>}
           options={options}
           data={data}
-          onMouseOver={(data) => console.log(data)}
           rootProps={{ 'data-testid': '1' }}
         />
       </div>
