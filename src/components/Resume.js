@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import BattleScene from "./BattleScene";
 import Loading from "./Loading";
 
 export default function Resume() {
@@ -15,7 +16,6 @@ export default function Resume() {
     if (!isReady) {
       history.push("/");
     } else {
-
       setHasAnswered(true);
     }
   }
@@ -23,9 +23,9 @@ export default function Resume() {
   return (
     <div>
       {!hasAnswered ?
-      <div className="nes-container with-title">
+      <div className="nes-container">
         <div className="are-you-ready">
-          <p>Are you ready?</p>
+          <p className="is-ready-ask">Are you ready?</p>
           <div className="is-ready-menu">
             <label>
               <input type="radio" className="nes-radio" name="answer" onChange={handleReadyChange} checked={isReady} />
@@ -36,12 +36,14 @@ export default function Resume() {
               <span>No</span>
             </label>
           </div>
-          <button
-              type="button"
-              className="nes-btn is-primary"
-              onClick={onContinueClick}>
-            Continue
-          </button>
+          <div className="is-ready-button">
+            <button
+                type="button"
+                className="nes-btn is-primary"
+                onClick={onContinueClick}>
+              Continue
+            </button>
+          </div>
         </div>
       </div>
       :
@@ -50,7 +52,7 @@ export default function Resume() {
           loading={isLoading}
           initial={0}
           max={100}
-          component={"Done - TODO"} />
+          component={<BattleScene />} />
       }
     </div>
   );

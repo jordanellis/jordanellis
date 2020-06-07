@@ -7,23 +7,28 @@
     "starter"
   ],
   "main": "src/index.js",
+  "homepage": "https://jordanellis.github.io/react-resume",
   "dependencies": {
+    "animate.css": "^4.1.0",
+    "nes.css": "^2.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-google-charts": "^3.0.15",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.1",
-    "nes.css": "^2.3.0"
+    "react-scripts": "^3.4.1"
   },
   "devDependencies": {
+    "gh-pages": "^3.0.0",
     "typescript": "^3.9.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",

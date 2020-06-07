@@ -14,7 +14,6 @@ export default function BuiltWith() {
           <tr className="built-with-row">
             <td className="nes-text is-primary">
               <img className="built-with-image" src={reactLogo} alt="React Logo" width="100" height="100" />
-              {console.log(process.env.npm_package_name)}
               ReactJS
             </td>
           </tr>

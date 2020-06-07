@@ -1,8 +1,7 @@
 import React from "react";
 import { createBrowserHistory } from "history";
-import "../styles.css";
-import "nes.css/css/nes.min.css";
 import { Router, Route, Switch } from "react-router-dom";
+import "nes.css/css/nes.min.css";
 
 import BuiltWith from "./BuiltWith";
 import Footer from "./Footer";
@@ -11,8 +10,9 @@ import HomePage from "./HomePage";
 import MakerID from "./MakerID";
 import Resume from "./Resume";
 import Skills from "./Skills";
+import "../styles.css";
 
-const defaultHistory = createBrowserHistory();
+const defaultHistory = createBrowserHistory({ basename: process.env.PUBLIC_URL });
 
 export default function App({ history = defaultHistory }) {
   return (

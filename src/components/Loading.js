@@ -16,7 +16,7 @@ export default function Loading(props) {
 	    	} else {
 	    		setLoadingValue(newValue);
 	    	}
-	    }, 100);
+	    }, 70);
 	    return () => clearInterval(timer);
 	  }, [loadingValue, max]);
 
