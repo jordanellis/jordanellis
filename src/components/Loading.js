@@ -18,7 +18,7 @@ export default function Loading(props) {
 	    	}
 	    }, 70);
 	    return () => clearInterval(timer);
-	  }, [loadingValue, max]);
+	}, [loadingValue, max]);
 
 	return (
 		<div>
