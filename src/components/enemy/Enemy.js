@@ -5,7 +5,13 @@ export default function Enemy(props) {
 	const { health, isIn, level, name, img } = props;
 	const [inProp, setInProp] = useState(isIn);
 
-	useEffect(() => setInProp(true), []);
+	useEffect(() => {
+		if (health <= 0) {
+			setInProp(false);
+		} else {
+			setInProp(true);
+		}
+	}, [health]);
 
 	return (
 		<div className="battle-enemy">

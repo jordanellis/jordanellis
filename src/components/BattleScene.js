@@ -2,39 +2,53 @@ import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
-import Enemy from "./Enemy";
-import wsuLogo from "../images/wsu_logo_pixel.png";
-import westinghouseLogo from "../images/westinghouse_logo_pixel.png";
-import gtLogo from "../images/gt_logo_pixel.png";
-import chaseLogo from "../images/chase_logo_pixel.png";
+import Enemy from "./enemy/Enemy";
+import enemyData from "./enemy/enemy-data";
 
 export default function BattleScene() {
 	const history = useHistory();
 	const [radioIndex, setRadioIndex] = useState();
 	const [battleMessage, setBattleMessage] = useState();
 	const [inProp, setInProp] = useState();
-	const [currentHealth, setCurrentHealth] = useState(100);
-	const enemies = [
-		{name: "Wright State", level: "2013", isIn: false, health: 100, img: wsuLogo},
-		{name: "Westinghouse", level: "2014", isIn: false, health: 100, img: westinghouseLogo},
-		{name: "Georgia Tech R.I.", level: "2015", isIn: false, health: 100, img: gtLogo},
-		{name: "JPMorgan Chase", level: "2017", isIn: false, health: 100, img: chaseLogo}
-	];
-	const [currentEnemyName, setCurrentEnemyName] = useState(enemies[0].name);
-	const [currentEnemyLevel, setCurrentEnemyLevel] = useState(enemies[0].level);
-	const [currentEnemyIsIn, setCurrentEnemyIsIn] = useState(enemies[0].isIn);
-	const [currentEnemyHealth, setCurrentEnemyHealth] = useState(enemies[0].health);
-	const [currentEnemyImg, setCurrentEnemyImg] = useState(enemies[0].img);
+	const [currentSelfHealth, setCurrentSelfHealth] = useState(100);
+	const [currentEnemyName, setCurrentEnemyName] = useState(enemyData[0].name);
+	const [currentEnemyLevel, setCurrentEnemyLevel] = useState(enemyData[0].level);
+	const [currentEnemyIsIn, setCurrentEnemyIsIn] = useState(enemyData[0].isIn);
+	const [currentEnemyHealth, setCurrentEnemyHealth] = useState(enemyData[0].health);
+	const [currentEnemyImg, setCurrentEnemyImg] = useState(enemyData[0].img);
+	const [currentEnemy, setCurrentEnemy] = useState(enemyData[0]);
+	const selfHealthRef = useRef(currentSelfHealth);
 	const enemyHealthRef = useRef(currentEnemyHealth);
+
+	useEffect(() => {
+		setCurrentEnemyName(currentEnemy.name);
+		setCurrentEnemyLevel(currentEnemy.level);
+		setCurrentEnemyIsIn(currentEnemy.isIn);
+		setCurrentEnemyHealth(currentEnemy.health);
+		setCurrentEnemyImg(currentEnemy.img);
+	}, [currentEnemy]);
+
 	useEffect(() => setInProp(true), []);
 
+	const sleep = (milliseconds) => {
+	  return new Promise(resolve => setTimeout(resolve, milliseconds))
+	}
+
 	const onOKClick = () => {
-		console.log("onOKClick");
 		if (radioIndex === 3) {
 			// TODO are you sure msg
 			history.push("/");
 		} else if (radioIndex === 0) {
-			decreaseHealth(34);
+			decreaseEnemyHealth(34).then((isEnemyHealthZero) => {
+				if (!isEnemyHealthZero) {
+					decreaseSelfHealth(20).then((isSelfHealthZero) => {
+						isSelfHealthZero && setBattleMessage("you lose");
+						// TODO you lose
+					});
+				} else {
+					// TODO new enemy
+				}
+			});
 		} else if (radioIndex === 1) {
 			
 		} else if (radioIndex === 2) {
@@ -42,18 +56,31 @@ export default function BattleScene() {
 		}
 	}
 
-	const decreaseHealth = (amount) => {
-		const endHealth = enemyHealthRef.current - amount;
-		const timer = setInterval(() => {
-	    	enemyHealthRef.current = enemyHealthRef.current - 1;
-	    	setCurrentEnemyHealth(enemyHealthRef.current);
-	    	if (enemyHealthRef.current <= 0) {
-	    		// TODO new enemy
+	const decreaseSelfHealth = async (amount) => {
+		setBattleMessage(currentEnemyName + " took its toll on Jordan");
+		await sleep(2000);
+		return decreaseHealth(selfHealthRef, amount, setCurrentSelfHealth);
+	}
+
+	const decreaseEnemyHealth = async (amount) => {
+		setBattleMessage("Jordan worked hard at " + currentEnemyName);
+		await sleep(2000);
+		return decreaseHealth(enemyHealthRef, amount, setCurrentEnemyHealth);
+	}
+
+	const decreaseHealth = (healthRef, amount, setHealth) => {
+		return new Promise((resolve) => {
+			const endHealth = healthRef.current - amount;
+			const timer = setInterval(() => {
+				if (healthRef.current === endHealth) {
 	    		clearInterval(timer);
-	    	} else if (enemyHealthRef.current === endHealth) {
-	    		clearInterval(timer);
+	    		resolve(healthRef.current <= 0);
+	    		return;
 	    	}
-	    }, 25);
+	    	healthRef.current = healthRef.current - 1;
+	    	setHealth(healthRef.current);
+	    }, 15);
+		});
 	}
 	
 
@@ -76,10 +103,10 @@ export default function BattleScene() {
 						<div className="level">:L 18</div>
 						<div className="hp">
 							HP:
-							<progress className="nes-progress is-success health-bar" value={currentHealth} max="100" />
+							<progress className="nes-progress is-success health-bar" value={currentSelfHealth} max="100" />
 						</div>
 						<div className="hp-values">
-							<span>{currentHealth}</span><span>/</span><span>100</span>
+							<span>{currentSelfHealth}</span><span>/</span><span>100</span>
 						</div>
 					</div>
 				</div>
@@ -90,21 +117,45 @@ export default function BattleScene() {
 							<tbody>
 								<tr>
 									<td><label>
-										<input type="radio" className="nes-radio" name="answer" onChange={() => setRadioIndex(0)} checked={radioIndex === 0} />
+										<input
+											type="radio"
+											className="nes-radio"
+											name="answer"
+											onChange={() => setRadioIndex(0)}
+											checked={radioIndex === 0}
+											/>
 										<span>Work</span>
 									</label></td>
 									<td><label>
-										<input type="radio" className="nes-radio" name="answer" onChange={() => setRadioIndex(1)} checked={radioIndex === 1} />
+										<input
+											type="radio"
+											className="nes-radio"
+											name="answer"
+											onChange={() => setRadioIndex(1)}
+											checked={radioIndex === 1}
+											/>
 										<span>Study</span>
 									</label></td>
 								</tr>
 								<tr>
 									<td><label>
-										<input type="radio" className="nes-radio" name="answer" onChange={() => setRadioIndex(2)} checked={radioIndex === 2} />
+										<input
+											type="radio"
+											className="nes-radio"
+											name="answer"
+											onChange={() => setRadioIndex(2)}
+											checked={radioIndex === 2}
+											/>
 										<span>Sleep</span>
 									</label></td>
 									<td><label>
-										<input type="radio" className="nes-radio" name="answer" onChange={() => setRadioIndex(3)} checked={radioIndex === 3} />
+										<input
+											type="radio"
+											className="nes-radio"
+											name="answer"
+											onChange={() => setRadioIndex(3)}
+											checked={radioIndex === 3}
+											/>
 										<span>Run</span>
 									</label></td>
 								</tr>
