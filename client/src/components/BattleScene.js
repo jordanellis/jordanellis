@@ -11,7 +11,7 @@ export default function BattleScene() {
 	const [battleMessage, setBattleMessage] = useState();
 	const [inProp, setInProp] = useState();
 	const [currentSelfHealth, setCurrentSelfHealth] = useState(100);
-	const CODE = "C0D3";
+	const [code, setCode] = useState();
 
 	const enemyIndex = useRef(0);
 	const [currentEnemyName, setCurrentEnemyName] = useState();
@@ -32,7 +32,12 @@ export default function BattleScene() {
 		enemyHealthRef.current = currentEnemy.health;
 	}, [currentEnemy]);
 
-	useEffect(() => setInProp(true), []);
+	useEffect(() => {
+		setInProp(true);
+		fetch('/api/code')
+		    .then(res => res.json())
+		    .then(code => setCode(code))
+	}, []);
 
 	const sleep = (milliseconds) => {
 	  return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -86,7 +91,7 @@ export default function BattleScene() {
 	const decreaseEnemyHealth = async () => {
 		setBattleMessage("Jordan worked hard at " + currentEnemyName);
 		await sleep(1500);
-		return changeHealth(enemyHealthRef, 34, setCurrentEnemyHealth);
+		return changeHealth(enemyHealthRef, 100, setCurrentEnemyHealth);
 	}
 
 	const changeHealth = (healthRef, amount, setHealth, add = false) => {
@@ -230,7 +235,7 @@ export default function BattleScene() {
 			<section>
 			  <dialog className="nes-dialog is-rounded" id="win-dialog">
 		      <p className="dialog-title">You Win!</p>
-		      <p>{"The code is: " + CODE}</p>
+		      <p>{"The code is: " + code}</p>
 		      <menu className="dialog-menu">
 		        <button className="nes-btn is-primary" onClick={onOKDialogClick}>OK</button>
 		      </menu>
