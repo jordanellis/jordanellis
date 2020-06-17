@@ -124,6 +124,12 @@ body {
 	text-align: center;
 }
 
+.dialog-menu {
+	display: flex;
+    justify-content: space-evenly;
+    padding: 0;
+}
+
 div.google-visualization-tooltip {
 	width: 12rem;
 	background-color: #e9eef8;
@@ -152,6 +158,8 @@ div.google-visualization-tooltip {
 }
 
 .enemy-logo {
+	border-radius: 4.6875rem;
+    border: 0rem;
 	width: 9rem;
 	margin: auto;
 }
@@ -216,6 +224,7 @@ div.google-visualization-tooltip {
 }
 
 .hp {
+	width: 14rem;
 	display: flex;
 }
 
@@ -254,6 +263,7 @@ img {
 }
 
 .level {
+	font-size: 0.75rem;
 	text-align: center;
 	margin-bottom: 0.5rem;
 }

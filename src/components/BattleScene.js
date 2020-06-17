@@ -9,9 +9,9 @@ export default function BattleScene() {
 	const history = useHistory();
 	const [radioIndex, setRadioIndex] = useState();
 	const [battleMessage, setBattleMessage] = useState();
-	const [dialogText, setDialogText] = useState();
 	const [inProp, setInProp] = useState();
 	const [currentSelfHealth, setCurrentSelfHealth] = useState(100);
+	const CODE = "C0D3";
 
 	const enemyIndex = useRef(0);
 	const [currentEnemyName, setCurrentEnemyName] = useState();
@@ -40,41 +40,53 @@ export default function BattleScene() {
 
 	const onOKClick = () => {
 		if (radioIndex === 3) {
-			// TODO are you sure msg
-			history.push("/");
+			showAreYouSureDialog();
 		} else if (radioIndex === 0) {
-			decreaseEnemyHealth(34).then((isEnemyHealthZero) => {
-				if (!isEnemyHealthZero) {
-					decreaseSelfHealth(50).then((isSelfHealthZero) => {
-						isSelfHealthZero && showDialogModal("Game Over");
-					});
-				} else {
-					enemyIndex.current++;
-					if (enemyIndex.current >= enemyData.length) {
-						// TODO you win
-						console.log("you win");
-					} else {
-						setCurrentEnemy(enemyData[enemyIndex.current]);
-					}
-				}
-			});
+			userWorksHard()
 		} else if (radioIndex === 1) {
-					// Study
+			slackOff();
 		} else if (radioIndex === 2) {
 			increaseHealth();
 		}
 	}
 
-	const decreaseSelfHealth = async (amount) => {
-		setBattleMessage(currentEnemyName + " took its toll on Jordan");
-		await sleep(2000);
-		return changeHealth(selfHealthRef, amount, setCurrentSelfHealth);
+	const userWorksHard = () => {
+		decreaseEnemyHealth().then((isEnemyHealthZero) => {
+			if (!isEnemyHealthZero) {
+				enemysTurn();
+			} else {
+				if (enemyIndex.current === enemyData.length-1) {
+					showWinDialog();
+				} else {
+					enemyIndex.current++;
+					setCurrentEnemy(enemyData[enemyIndex.current]);
+				}
+			}
+		});
 	}
 
-	const decreaseEnemyHealth = async (amount) => {
+	const enemysTurn = () => {
+		decreaseSelfHealth().then((isSelfHealthZero) => {
+			isSelfHealthZero && showGameOverDialog();
+		});
+	}
+
+	const slackOff = async () => {
+		setBattleMessage("Jordan slacked off... smh...");
+		await sleep(1500);
+		enemysTurn();
+	}
+
+	const decreaseSelfHealth = async () => {
+		setBattleMessage(currentEnemyName + " took its toll on Jordan");
+		await sleep(1500);
+		return changeHealth(selfHealthRef, 20, setCurrentSelfHealth);
+	}
+
+	const decreaseEnemyHealth = async () => {
 		setBattleMessage("Jordan worked hard at " + currentEnemyName);
-		await sleep(2000);
-		return changeHealth(enemyHealthRef, amount, setCurrentEnemyHealth);
+		await sleep(1500);
+		return changeHealth(enemyHealthRef, 34, setCurrentEnemyHealth);
 	}
 
 	const changeHealth = (healthRef, amount, setHealth, add = false) => {
@@ -98,16 +110,19 @@ export default function BattleScene() {
 
 	const increaseHealth = async () => {
 		setBattleMessage("Ahh... Sleep. That feels better!");
-		await sleep(2000);
+		await sleep(1500);
 		return changeHealth(selfHealthRef, (selfHealthRef.current - 100), setCurrentSelfHealth, true);
 	}
 
 	const onOKDialogClick = () => {history.push("/")}
 
-	const showDialogModal = (text) => {
-		setDialogText(text);
-		document.getElementById('dialog-rounded').showModal();
-	}
+	const onNoClick = () => {document.getElementById('are-you-sure-dialog').close()}
+
+	const showGameOverDialog = () => {document.getElementById('game-over-dialog').showModal()}
+
+	const showAreYouSureDialog = () => {document.getElementById('are-you-sure-dialog').showModal()}
+
+	const showWinDialog = () => {document.getElementById('win-dialog').showModal()}
 
 	return (
 		<div>
@@ -159,7 +174,7 @@ export default function BattleScene() {
 											onChange={() => setRadioIndex(1)}
 											checked={radioIndex === 1}
 											/>
-										<span>Study</span>
+										<span>Relax</span>
 									</label></td>
 								</tr>
 								<tr>
@@ -196,8 +211,26 @@ export default function BattleScene() {
 				OK
 			</button>
 			<section>
-			  <dialog className="nes-dialog is-rounded" id="dialog-rounded">
-		      <p className="dialog-title">{dialogText}</p>
+			  <dialog className="nes-dialog is-rounded" id="game-over-dialog">
+		      <p className="dialog-title">Game Over</p>
+		      <menu className="dialog-menu">
+		        <button className="nes-btn is-primary" onClick={onOKDialogClick}>OK</button>
+		      </menu>
+			  </dialog>
+			</section>
+			<section>
+			  <dialog className="nes-dialog is-rounded" id="are-you-sure-dialog">
+		      <p className="dialog-title">Are you sure?</p>
+		      <menu className="dialog-menu">
+		        <button className="nes-btn is-primary" onClick={onOKDialogClick}>Yes</button>
+		        <button className="nes-btn" onClick={onNoClick}>No</button>
+		      </menu>
+			  </dialog>
+			</section>
+			<section>
+			  <dialog className="nes-dialog is-rounded" id="win-dialog">
+		      <p className="dialog-title">You Win!</p>
+		      <p>{"The code is: " + CODE}</p>
 		      <menu className="dialog-menu">
 		        <button className="nes-btn is-primary" onClick={onOKDialogClick}>OK</button>
 		      </menu>
