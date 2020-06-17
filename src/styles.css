@@ -254,9 +254,8 @@ img {
 }
 
 .level {
-	margin-left: 5.5rem;
+	text-align: center;
 	margin-bottom: 0.5rem;
-	margin-right: 2.5rem;
 }
 
 .loading {

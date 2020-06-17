@@ -9,23 +9,27 @@ export default function BattleScene() {
 	const history = useHistory();
 	const [radioIndex, setRadioIndex] = useState();
 	const [battleMessage, setBattleMessage] = useState();
+	const [dialogText, setDialogText] = useState();
 	const [inProp, setInProp] = useState();
 	const [currentSelfHealth, setCurrentSelfHealth] = useState(100);
-	const [currentEnemyName, setCurrentEnemyName] = useState(enemyData[0].name);
-	const [currentEnemyLevel, setCurrentEnemyLevel] = useState(enemyData[0].level);
-	const [currentEnemyIsIn, setCurrentEnemyIsIn] = useState(enemyData[0].isIn);
-	const [currentEnemyHealth, setCurrentEnemyHealth] = useState(enemyData[0].health);
-	const [currentEnemyImg, setCurrentEnemyImg] = useState(enemyData[0].img);
-	const [currentEnemy, setCurrentEnemy] = useState(enemyData[0]);
+
+	const enemyIndex = useRef(0);
+	const [currentEnemyName, setCurrentEnemyName] = useState();
+	const [currentEnemyLevel, setCurrentEnemyLevel] = useState();
+	const [currentEnemyIsIn, setCurrentEnemyIsIn] = useState();
+	const [currentEnemyHealth, setCurrentEnemyHealth] = useState();
+	const [currentEnemyImg, setCurrentEnemyImg] = useState();
 	const selfHealthRef = useRef(currentSelfHealth);
 	const enemyHealthRef = useRef(currentEnemyHealth);
 
+	const [currentEnemy, setCurrentEnemy] = useState(enemyData[enemyIndex.current]);
 	useEffect(() => {
 		setCurrentEnemyName(currentEnemy.name);
 		setCurrentEnemyLevel(currentEnemy.level);
 		setCurrentEnemyIsIn(currentEnemy.isIn);
 		setCurrentEnemyHealth(currentEnemy.health);
 		setCurrentEnemyImg(currentEnemy.img);
+		enemyHealthRef.current = currentEnemy.health;
 	}, [currentEnemy]);
 
 	useEffect(() => setInProp(true), []);
@@ -41,34 +45,39 @@ export default function BattleScene() {
 		} else if (radioIndex === 0) {
 			decreaseEnemyHealth(34).then((isEnemyHealthZero) => {
 				if (!isEnemyHealthZero) {
-					decreaseSelfHealth(20).then((isSelfHealthZero) => {
-						isSelfHealthZero && setBattleMessage("you lose");
-						// TODO you lose
+					decreaseSelfHealth(50).then((isSelfHealthZero) => {
+						isSelfHealthZero && showDialogModal("Game Over");
 					});
 				} else {
-					// TODO new enemy
+					enemyIndex.current++;
+					if (enemyIndex.current >= enemyData.length) {
+						// TODO you win
+						console.log("you win");
+					} else {
+						setCurrentEnemy(enemyData[enemyIndex.current]);
+					}
 				}
 			});
 		} else if (radioIndex === 1) {
-			
+					// Study
 		} else if (radioIndex === 2) {
-			
+			increaseHealth();
 		}
 	}
 
 	const decreaseSelfHealth = async (amount) => {
 		setBattleMessage(currentEnemyName + " took its toll on Jordan");
 		await sleep(2000);
-		return decreaseHealth(selfHealthRef, amount, setCurrentSelfHealth);
+		return changeHealth(selfHealthRef, amount, setCurrentSelfHealth);
 	}
 
 	const decreaseEnemyHealth = async (amount) => {
 		setBattleMessage("Jordan worked hard at " + currentEnemyName);
 		await sleep(2000);
-		return decreaseHealth(enemyHealthRef, amount, setCurrentEnemyHealth);
+		return changeHealth(enemyHealthRef, amount, setCurrentEnemyHealth);
 	}
 
-	const decreaseHealth = (healthRef, amount, setHealth) => {
+	const changeHealth = (healthRef, amount, setHealth, add = false) => {
 		return new Promise((resolve) => {
 			const endHealth = healthRef.current - amount;
 			const timer = setInterval(() => {
@@ -77,12 +86,28 @@ export default function BattleScene() {
 	    		resolve(healthRef.current <= 0);
 	    		return;
 	    	}
-	    	healthRef.current = healthRef.current - 1;
+	    	if (add) {
+					healthRef.current = healthRef.current + 1;
+	    	} else {
+		    	healthRef.current = healthRef.current - 1;
+		    }
 	    	setHealth(healthRef.current);
 	    }, 15);
 		});
 	}
-	
+
+	const increaseHealth = async () => {
+		setBattleMessage("Ahh... Sleep. That feels better!");
+		await sleep(2000);
+		return changeHealth(selfHealthRef, (selfHealthRef.current - 100), setCurrentSelfHealth, true);
+	}
+
+	const onOKDialogClick = () => {history.push("/")}
+
+	const showDialogModal = (text) => {
+		setDialogText(text);
+		document.getElementById('dialog-rounded').showModal();
+	}
 
 	return (
 		<div>
@@ -100,7 +125,7 @@ export default function BattleScene() {
 					</CSSTransition>
 					<div className="nes-container battle-self-stats">
 						<h3>Jordan Ellis</h3>
-						<div className="level">:L 18</div>
+						<div className="level">{":L " + enemyData[enemyIndex.current].userLevel}</div>
 						<div className="hp">
 							HP:
 							<progress className="nes-progress is-success health-bar" value={currentSelfHealth} max="100" />
@@ -170,6 +195,14 @@ export default function BattleScene() {
 					onClick={onOKClick}>
 				OK
 			</button>
+			<section>
+			  <dialog className="nes-dialog is-rounded" id="dialog-rounded">
+		      <p className="dialog-title">{dialogText}</p>
+		      <menu className="dialog-menu">
+		        <button className="nes-btn is-primary" onClick={onOKDialogClick}>OK</button>
+		      </menu>
+			  </dialog>
+			</section>
 		</div>
 	);
 }
