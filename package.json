@@ -5,10 +5,14 @@
   "main": "server.js",
   "author": "Jordan Ellis",
   "scripts": {
-    "start": "node server.js",
+    "start": "concurrently \"node server.js\" \"cd client && react-scripts start\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "react-scripts": "^3.4.1"
   }
 }
