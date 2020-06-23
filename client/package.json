@@ -15,7 +15,8 @@
     "react-google-charts": "^3.0.15",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-transition-group": "^4.4.1"
+    "react-transition-group": "^4.4.1",
+    "typewriter-effect": "^2.13.1"
   },
   "devDependencies": {
     "react-scripts": "^3.4.1",

@@ -44,8 +44,8 @@ body {
 }
 
 .battle-messages {
-	width: 20rem;
-	display: inline-block;
+	width: 20rem !important;
+	display: inline-block !important;
 }
 
 .battle-options {

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import Typewriter from 'typewriter-effect';
 
 import Enemy from "./enemy/Enemy";
 import enemyData from "./enemy/enemy-data";
@@ -12,6 +13,7 @@ export default function BattleScene() {
 	const [inProp, setInProp] = useState();
 	const [currentSelfHealth, setCurrentSelfHealth] = useState(100);
 	const [code, setCode] = useState();
+	const SLEEP_TIME = 3000;
 
 	const enemyIndex = useRef(0);
 	const [currentEnemyName, setCurrentEnemyName] = useState();
@@ -78,20 +80,20 @@ export default function BattleScene() {
 
 	const slackOff = async () => {
 		setBattleMessage("Jordan slacked off... smh...");
-		await sleep(1500);
+		await sleep(SLEEP_TIME);
 		enemysTurn();
 	}
 
 	const decreaseSelfHealth = async () => {
 		setBattleMessage(currentEnemyName + " took its toll on Jordan");
-		await sleep(1500);
+		await sleep(SLEEP_TIME);
 		return changeHealth(selfHealthRef, 20, setCurrentSelfHealth);
 	}
 
 	const decreaseEnemyHealth = async () => {
 		setBattleMessage("Jordan worked hard at " + currentEnemyName);
-		await sleep(1500);
-		return changeHealth(enemyHealthRef, 100, setCurrentEnemyHealth);
+		await sleep(SLEEP_TIME);
+		return changeHealth(enemyHealthRef, 34, setCurrentEnemyHealth);
 	}
 
 	const changeHealth = (healthRef, amount, setHealth, add = false) => {
@@ -115,7 +117,7 @@ export default function BattleScene() {
 
 	const increaseHealth = async () => {
 		setBattleMessage("Ahh... Sleep. That feels better!");
-		await sleep(1500);
+		await sleep(SLEEP_TIME);
 		return changeHealth(selfHealthRef, (selfHealthRef.current - 100), setCurrentSelfHealth, true);
 	}
 
@@ -156,7 +158,16 @@ export default function BattleScene() {
 					</div>
 				</div>
 				<div className="nes-container is-rounded battle-text-display">
-					<p className="battle-messages">{battleMessage}</p>
+					<div className="battle-messages">
+						<Typewriter
+							options={{
+							    strings: battleMessage,
+							    autoStart: true,
+							    delay: 40,
+							    cursor: ""
+							}}
+						/>
+					</div>
 					<div className="nes-container is-rounded battle-options">
 						<table className="battle-menu">
 							<tbody>
