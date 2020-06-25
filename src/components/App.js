@@ -8,7 +8,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import HomePage from "./HomePage";
 import MakerID from "./MakerID";
-import Resume from "./Resume";
+import Resume from "./battle/Resume";
 import Skills from "./Skills";
 import "../styles.css";
 

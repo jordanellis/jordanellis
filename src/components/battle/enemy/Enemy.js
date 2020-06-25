@@ -23,7 +23,7 @@ export default function Enemy(props) {
 					<progress className="nes-progress is-success health-bar" value={health} max="100" />
 				</div>
 			</div>
-			<CSSTransition in={inProp} timeout={2000} classNames="enemy">
+			<CSSTransition in={inProp} timeout={100000} classNames="enemy">
 				<img src={img} alt="Enemy Logo" className="enemy-logo" />
 			</CSSTransition>
 		</div>

@@ -12,7 +12,6 @@ export default function BattleScene() {
 	const [battleMessage, setBattleMessage] = useState();
 	const [inProp, setInProp] = useState();
 	const [currentSelfHealth, setCurrentSelfHealth] = useState(100);
-	const [code, setCode] = useState();
 	const SLEEP_TIME = 3000;
 
 	const enemyIndex = useRef(0);
@@ -21,6 +20,7 @@ export default function BattleScene() {
 	const [currentEnemyIsIn, setCurrentEnemyIsIn] = useState();
 	const [currentEnemyHealth, setCurrentEnemyHealth] = useState();
 	const [currentEnemyImg, setCurrentEnemyImg] = useState();
+	const [currentEnemyLearned, setCurrentEnemyLearned] = useState();
 	const selfHealthRef = useRef(currentSelfHealth);
 	const enemyHealthRef = useRef(currentEnemyHealth);
 
@@ -31,14 +31,12 @@ export default function BattleScene() {
 		setCurrentEnemyIsIn(currentEnemy.isIn);
 		setCurrentEnemyHealth(currentEnemy.health);
 		setCurrentEnemyImg(currentEnemy.img);
+		setCurrentEnemyLearned(currentEnemy.learned);
 		enemyHealthRef.current = currentEnemy.health;
 	}, [currentEnemy]);
 
 	useEffect(() => {
 		setInProp(true);
-		fetch('/api/code')
-		    .then(res => res.json())
-		    .then(code => setCode(code))
 	}, []);
 
 	const sleep = (milliseconds) => {
@@ -62,14 +60,27 @@ export default function BattleScene() {
 			if (!isEnemyHealthZero) {
 				enemysTurn();
 			} else {
-				if (enemyIndex.current === enemyData.length-1) {
-					showWinDialog();
-				} else {
-					enemyIndex.current++;
-					setCurrentEnemy(enemyData[enemyIndex.current]);
-				}
+				nextEnemy();
 			}
 		});
+	}
+
+	const nextEnemy = async () => {
+		if (enemyIndex.current === enemyData.length-1) {
+			showWinDialog();
+		} else {
+			await showLearned();
+			enemyIndex.current++;
+			setCurrentEnemy(enemyData[enemyIndex.current]);
+		}
+	}
+
+	const showLearned = async () => {
+		setBattleMessage(currentEnemyName + " fainted");
+		await sleep(SLEEP_TIME);
+		setBattleMessage("Jordan leveled up and learned " + currentEnemyLearned + "!");
+		await sleep(SLEEP_TIME);
+		setBattleMessage("");
 	}
 
 	const enemysTurn = () => {
@@ -246,7 +257,6 @@ export default function BattleScene() {
 			<section>
 			  <dialog className="nes-dialog is-rounded" id="win-dialog">
 		      <p className="dialog-title">You Win!</p>
-		      <p>{"The code is: " + code}</p>
 		      <menu className="dialog-menu">
 		        <button className="nes-btn is-primary" onClick={onOKDialogClick}>OK</button>
 		      </menu>
