@@ -12,6 +12,7 @@ export default function BattleScene() {
 	const [battleMessage, setBattleMessage] = useState();
 	const [inProp, setInProp] = useState();
 	const [currentSelfHealth, setCurrentSelfHealth] = useState(100);
+	const [isBattleBusy, setIsBattleBusy] = useState(false);
 	const SLEEP_TIME = 3000;
 
 	const enemyIndex = useRef(0);
@@ -43,11 +44,14 @@ export default function BattleScene() {
 	  return new Promise(resolve => setTimeout(resolve, milliseconds))
 	}
 
-	const onOKClick = () => {
+	const onOKClick = async () => {
+		if (isBattleBusy) {
+			return;
+		}
 		if (radioIndex === 3) {
 			showAreYouSureDialog();
 		} else if (radioIndex === 0) {
-			userWorksHard()
+			userWorksHard();
 		} else if (radioIndex === 1) {
 			slackOff();
 		} else if (radioIndex === 2) {
@@ -55,7 +59,8 @@ export default function BattleScene() {
 		}
 	}
 
-	const userWorksHard = () => {
+	const userWorksHard = async () => {
+		setIsBattleBusy(true);
 		decreaseEnemyHealth().then((isEnemyHealthZero) => {
 			if (!isEnemyHealthZero) {
 				enemysTurn();
@@ -72,6 +77,7 @@ export default function BattleScene() {
 			await showLearned();
 			enemyIndex.current++;
 			setCurrentEnemy(enemyData[enemyIndex.current]);
+			setIsBattleBusy(false);
 		}
 	}
 
@@ -83,16 +89,18 @@ export default function BattleScene() {
 		setBattleMessage("");
 	}
 
-	const enemysTurn = () => {
+	const enemysTurn = async () => {
 		decreaseSelfHealth().then((isSelfHealthZero) => {
+			setIsBattleBusy(false);
 			isSelfHealthZero && showGameOverDialog();
 		});
 	}
 
 	const slackOff = async () => {
+		setIsBattleBusy(true);
 		setBattleMessage("Jordan slacked off... smh...");
 		await sleep(SLEEP_TIME);
-		enemysTurn();
+		await enemysTurn();
 	}
 
 	const decreaseSelfHealth = async () => {
@@ -127,9 +135,11 @@ export default function BattleScene() {
 	}
 
 	const increaseHealth = async () => {
+		setIsBattleBusy(true);
 		setBattleMessage("Ahh... Sleep. That feels better!");
 		await sleep(SLEEP_TIME);
-		return changeHealth(selfHealthRef, (selfHealthRef.current - 100), setCurrentSelfHealth, true);
+		await changeHealth(selfHealthRef, (selfHealthRef.current - 100), setCurrentSelfHealth, true);
+		setIsBattleBusy(false);
 	}
 
 	const onOKDialogClick = () => {history.push("/")}
@@ -233,7 +243,7 @@ export default function BattleScene() {
 			</div>
 			<button
 				type="button"
-					className="nes-btn is-primary"
+					className={isBattleBusy ? "nes-btn is-disabled" : "nes-btn is-primary"}
 					onClick={onOKClick}>
 				OK
 			</button>
