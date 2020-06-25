@@ -44,7 +44,7 @@ export default function BattleScene() {
 	  return new Promise(resolve => setTimeout(resolve, milliseconds))
 	}
 
-	const onOKClick = async () => {
+	const onSelectClick = async () => {
 		if (isBattleBusy) {
 			return;
 		}
@@ -241,12 +241,14 @@ export default function BattleScene() {
 					</div>
 				</div>
 			</div>
-			<button
-				type="button"
-					className={isBattleBusy ? "nes-btn is-disabled" : "nes-btn is-primary"}
-					onClick={onOKClick}>
-				OK
-			</button>
+			<div className="battle-select-button-container">
+				<button
+					type="button"
+						className={isBattleBusy ? "battle-select-button nes-btn is-disabled" : "battle-select-button nes-btn is-primary"}
+						onClick={onSelectClick}>
+					Select
+				</button>
+			</div>
 			<section>
 			  <dialog className="nes-dialog is-rounded" id="game-over-dialog">
 		      <p className="dialog-title">Game Over</p>

@@ -67,6 +67,15 @@ body {
 	padding-right: 0.5rem;
 }
 
+.battle-select-button {
+    width: 100%;
+}
+
+.battle-select-button-container {
+	margin: 1rem auto;
+    width: 25rem;
+}
+
 .battle-self {
 	display: flex;
     justify-content: space-between;
