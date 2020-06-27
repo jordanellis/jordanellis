@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import BattleScene from "./BattleScene";
 import Loading from "./Loading";
 
-export default function Resume() {
+export default function Battle() {
   const history = useHistory();
   const [hasAnswered, setHasAnswered] = useState(false);
   const [isReady, setIsReady] = useState(false);

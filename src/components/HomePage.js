@@ -10,8 +10,15 @@ export default function HomePage() {
         <tbody>
           <tr>
             <td>
-              <Link className="nes-btn is-primary" to="/resume/">
+              <Link className="nes-btn is-primary" to="/battle/">
                 Begin
+              </Link>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Link className="nes-btn is-primary" to="/resume/">
+                Resume
               </Link>
             </td>
           </tr>

@@ -8,7 +8,8 @@ import Footer from "./Footer";
 import Header from "./Header";
 import HomePage from "./HomePage";
 import MakerID from "./MakerID";
-import Resume from "./battle/Resume";
+import Battle from "./battle/Battle";
+import Resume from "./resume/Resume";
 import Skills from "./Skills";
 import "../styles.css";
 
@@ -23,6 +24,7 @@ export default function App({ history = defaultHistory }) {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/built-with/" component={BuiltWith} />
           <Route exact path="/maker-id/" component={MakerID} />
+          <Route exact path="/battle/" component={Battle} />
           <Route exact path="/resume/" component={Resume} />
           <Route exact path="/skills/" component={Skills} />
         </Switch>
