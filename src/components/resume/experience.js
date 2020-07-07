@@ -12,12 +12,6 @@ const experience = [
 			"Managed and maintained an internal front-end React component library",
 			"Collaborated on a Python library to implement Infrastructure as Code within the firm",
 			"Handled migrating one of our full stack applications from Pivotal Cloud Foundry to AWS",
-			"Updated and redesigned several user interfaces using React with NodeJS",
-			"Collaborated on a Python library to implement Infrastructure as Code within the firm",
-			"Handled migrating one of our full stack applications from Pivotal Cloud Foundry to AWS",
-			"Updated and redesigned several user interfaces using React with NodeJS",
-			"Collaborated on a Python library to implement Infrastructure as Code within the firm",
-			"Handled migrating one of our full stack applications from Pivotal Cloud Foundry to AWS",
 			"Updated and redesigned several user interfaces using React with NodeJS"
 		]
 	},
