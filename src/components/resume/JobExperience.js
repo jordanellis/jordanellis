@@ -23,7 +23,7 @@ export default function JobExperience(props) {
           <ul className="nes-list is-circle">
             {jobTasks.map((jobTask, keyValue) => {
               return (
-                <li key={keyValue}>{jobTask}</li>
+                <li className="job-experience-task" key={keyValue}>{jobTask}</li>
               );
             })}
           </ul>
